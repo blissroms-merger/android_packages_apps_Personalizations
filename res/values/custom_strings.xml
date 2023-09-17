@@ -14,6 +14,18 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
 
+    <!-- QS panel styles -->
+    <string name="theme_customization_qs_style_title">QS Panel style</string>
+    <string name="theme_customization_qs_style_summary">Set custom QS Panel style</string>
+
+    <!-- Brightness bar styles -->
+    <string name="theme_customization_brightness_bar_title">Brightness bar style</string>
+    <string name="theme_customization_brightness_bar_summary">Set custom brightness bar style</string>
+
+    <!-- Notifications style -->
+    <string name="theme_customization_notifications_title">Notifications style</string>
+    <string name="theme_customization_notifications_summary">Set custom notifications style</string>
+    
     <!-- Device Info screen. RisingOS legal. -->
     <string name="rising_license_title">RisingOS legal</string>
     <string name="model">Model</string>

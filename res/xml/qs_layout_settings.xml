@@ -6,10 +6,6 @@
     xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
     android:title="@string/qs_layout_category_title">
 
-    <com.android.settingslib.widget.IllustrationPreference
-        android:key="lottie_row_quick_setting_style"
-        app:lottie_rawRes="@raw/lottie_row_quick_setting_style" />
-
     <PreferenceCategory 
          android:title="@string/qs_battery_styles_title">
             
@@ -30,7 +26,6 @@
             android:title="@string/status_bar_battery_style_title"
             android:entries="@array/qs_battery_style_entries"
             android:entryValues="@array/qs_battery_style_values"
-            android:defaultValue="-1"
             app:position="bottom" />
 
     </PreferenceCategory>
@@ -58,6 +53,15 @@
             android:defaultValue="1"
             app:isLineageSettings="true"
             app:position="middle" />
+
+        <!-- Brightness bar style -->
+        <com.rising.settings.preferences.AdaptivePreference
+            android:key="qs_bb_style"
+            android:icon="@drawable/ic_color_bucket"
+            android:title="@string/theme_customization_brightness_bar_title"
+            android:summary="@string/theme_customization_brightness_bar_summary"
+            android:fragment="com.rising.settings.fragments.BrightnessBarStyles" 
+            app:position="middle"/>
 
         <com.rising.settings.preferences.SecureSettingListPreference
             android:key="qs_brightness_slider_position"
@@ -235,27 +239,22 @@
         android:title="@string/qs_transitions_title"
         app:position="middle" />
 
-     <!-- QS styles -->
-    <com.rising.settings.preferences.SystemSettingListPreference
+     <!-- Notifications style -->
+    <com.rising.settings.preferences.AdaptivePreference
+        android:key="qs_nf_style"
+        android:icon="@drawable/ic_color_bucket"
+        android:title="@string/theme_customization_notifications_title"
+        android:summary="@string/theme_customization_notifications_summary"
+        android:fragment="com.rising.settings.fragments.NotificationStyles" 
+        app:position="middle"/>
+
+    <!-- QS Panel style -->
+    <com.rising.settings.preferences.AdaptivePreference
         android:key="qs_panel_style"
         android:icon="@drawable/ic_color_bucket"
-        android:title="@string/qs_styles_title"
-        android:entries="@array/qs_styles_entries"
-        android:entryValues="@array/qs_styles_values"
-        android:summary="%s"
-        android:defaultValue="0"
-        app:position="middle" />
-
-     <!-- QS UI -->
-    <com.rising.settings.preferences.SystemSettingListPreference
-        android:key="qs_ui_style"
-        android:icon="@drawable/ic_color_bucket"
-        android:title="@string/qs_ui_title"
-        android:entries="@array/qs_ui_entries"
-        android:entryValues="@array/qs_ui_values"
-        android:summary="%s"
-        android:defaultValue="0"
+        android:title="@string/theme_customization_qs_style_title"
+        android:summary="@string/theme_customization_qs_style_summary"
+        android:fragment="com.rising.settings.fragments.QsPanelStyles"
         app:position="bottom"/>
-        
     </PreferenceCategory>
 </PreferenceScreen>
