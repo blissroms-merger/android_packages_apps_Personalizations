@@ -68,6 +68,14 @@
         android:defaultValue="true"
         app:position="middle" />
 
+    <com.rising.settings.preferences.SecureSettingSwitchPreference
+        android:key="media_controls_always_show_time"
+        android:icon="@drawable/ic_music_note"
+        android:title="@string/media_controls_always_show_time_title"
+        android:summary="@string/media_controls_always_show_time_summary"
+        android:defaultValue="false"
+        app:position="middle"/>
+
     <com.rising.settings.preferences.SystemSettingSwitchPreference
         android:key="media_artwork_blur_enabled"
         android:icon="@drawable/ic_blur"
