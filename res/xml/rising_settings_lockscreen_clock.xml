@@ -50,7 +50,7 @@
         android:key="kg_small_clock_text_size"
         android:icon="@drawable/ic_font"
         android:title="@string/kg_small_clock_text_size_title"
-        android:max="100"
+        android:max="120"
         settings:min="25"
         settings:interval="1"
         android:defaultValue="86"
