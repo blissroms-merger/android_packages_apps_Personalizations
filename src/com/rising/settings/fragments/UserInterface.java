@@ -110,6 +110,10 @@ public class UserInterface extends SettingsPreferenceFragment implements
         mSettingsHeaderText.setOnPreferenceChangeListener(this);
         mSettingsHeaderTextEnabled = (SystemSettingSwitchPreference) findPreference(SETTINGS_HEADER_TEXT_ENABLED);
         mSettingsHeaderTextEnabled.setOnPreferenceChangeListener(this);
+
+        mVowifiIconStyle = findPreference(VOWIFI_ICON_STYLE);
+        mVolteIconStyle = findPreference(VOLTE_ICON_STYLE);
+
     }
 
     @Override
@@ -147,7 +151,7 @@ public class UserInterface extends SettingsPreferenceFragment implements
             SystemProperties.set("persist.sys.settings.header_text", value);
             systemUtils.showSettingsRestartDialog(getActivity());
             return true;
-	}
+      	}
         return false;
     }
 
