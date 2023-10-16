@@ -20,6 +20,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
     android:title="@string/ui_title" >
+
+    <com.android.settingslib.widget.IllustrationPreference
+        android:key="personalizations_illustration"
+        app:lottie_rawRes="@raw/personalizations_illustration"/>
           
     <!-- Font style -->
     <com.rising.settings.preferences.AdaptivePreference
