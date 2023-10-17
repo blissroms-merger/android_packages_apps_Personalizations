@@ -20,6 +20,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:title="@string/misc_title" >
 
+    <com.android.settingslib.widget.IllustrationPreference
+        android:key="misc_animation"
+        app:lottie_rawRes="@raw/misc_animation"/>
+
     <PreferenceCategory
         android:title="@string/misc_general_settings_title">
 

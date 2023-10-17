@@ -866,7 +866,7 @@
         <item>4</item>
         <item>5</item>
     </string-array>
-    
+
     <string-array name="system_manager_aggressive_idle_mode_ringer_entries">
         <item>@string/system_manager_aggressive_idle_mode_ringer_off_title</item>
         <item>@string/system_manager_aggressive_idle_mode_ringer_vibrate_title</item>

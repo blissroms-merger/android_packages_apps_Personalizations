@@ -90,7 +90,6 @@ public class UserInterface extends SettingsPreferenceFragment implements
         final PreferenceScreen prefScreen = getPreferenceScreen();
         
         mThemeUtils = new ThemeUtils(getActivity());
-        mCustomSettingsObserver.observe();
 
         mSettingsDashBoardStyle = (SystemSettingListPreference) findPreference(SETTINGS_DASHBOARD_STYLE);
         mSettingsDashBoardStyle.setOnPreferenceChangeListener(this);
@@ -111,15 +110,12 @@ public class UserInterface extends SettingsPreferenceFragment implements
         mSettingsHeaderTextEnabled = (SystemSettingSwitchPreference) findPreference(SETTINGS_HEADER_TEXT_ENABLED);
         mSettingsHeaderTextEnabled.setOnPreferenceChangeListener(this);
 
-        mVowifiIconStyle = findPreference(VOWIFI_ICON_STYLE);
-        mVolteIconStyle = findPreference(VOLTE_ICON_STYLE);
-
     }
 
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
-	Context mContext = getActivity().getApplicationContext();
-	ContentResolver resolver = mContext.getContentResolver();
+	      Context mContext = getActivity().getApplicationContext();
+	      ContentResolver resolver = mContext.getContentResolver();
         if (preference == mSettingsDashBoardStyle) {
             mCustomSettingsObserver.observe();
             return true;

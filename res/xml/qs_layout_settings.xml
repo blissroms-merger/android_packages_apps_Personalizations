@@ -58,15 +58,6 @@
             app:isLineageSettings="true"
             app:position="middle" />
 
-        <!-- Brightness bar style -->
-        <com.rising.settings.preferences.AdaptivePreference
-            android:key="qs_bb_style"
-            android:icon="@drawable/ic_color_bucket"
-            android:title="@string/theme_customization_brightness_bar_title"
-            android:summary="@string/theme_customization_brightness_bar_summary"
-            android:fragment="com.rising.settings.fragments.BrightnessBarStyles" 
-            app:position="middle"/>
-
         <com.rising.settings.preferences.SecureSettingListPreference
             android:key="qs_brightness_slider_position"
             android:icon="@drawable/ic_brightness"
@@ -241,24 +232,7 @@
         android:entryValues="@array/qs_transitions_values"
         android:summary="%s"
         android:title="@string/qs_transitions_title"
-        app:position="middle" />
+        app:position="bottom" />
 
-     <!-- Notifications style -->
-    <com.rising.settings.preferences.AdaptivePreference
-        android:key="qs_nf_style"
-        android:icon="@drawable/ic_color_bucket"
-        android:title="@string/theme_customization_notifications_title"
-        android:summary="@string/theme_customization_notifications_summary"
-        android:fragment="com.rising.settings.fragments.NotificationStyles" 
-        app:position="middle"/>
-
-    <!-- QS Panel style -->
-    <com.rising.settings.preferences.AdaptivePreference
-        android:key="qs_panel_style"
-        android:icon="@drawable/ic_color_bucket"
-        android:title="@string/theme_customization_qs_style_title"
-        android:summary="@string/theme_customization_qs_style_summary"
-        android:fragment="com.rising.settings.fragments.QsPanelStyles"
-        app:position="bottom"/>
     </PreferenceCategory>
 </PreferenceScreen>

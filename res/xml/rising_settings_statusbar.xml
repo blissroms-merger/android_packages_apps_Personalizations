@@ -21,6 +21,10 @@
     xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
     android:title="@string/statusbar_title" >
 
+    <com.android.settingslib.widget.IllustrationPreference
+        android:key="statusbar_settings"
+        app:lottie_rawRes="@raw/statusbar_settings"/>
+
     <!-- Status bar battery customizations -->
     <PreferenceCategory
         android:title="@string/status_bar_battery_category_title" >

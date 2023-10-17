@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2023 crDroid Android Project
+ * Copyright (C) 2021 AospExtended ROM Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,16 +14,17 @@
  * limitations under the License.
  */
 
-package com.rising.settings.fragments;
+package com.rising.settings.fragments.ui;
 
 import android.content.ContentResolver;
 import android.content.Context;
+import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.content.pm.PackageManager;
-import android.graphics.drawable.AnimationDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.os.UserHandle;
+import android.os.Handler;
+import android.os.Looper;
 import android.provider.SearchIndexableResource;
 import android.provider.Settings;
 import android.view.LayoutInflater;
@@ -53,11 +54,12 @@ import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.search.Indexable;
 import com.android.settings.SettingsPreferenceFragment;
 
-import com.bumptech.glide.Glide;
-
 import com.android.internal.util.rising.ThemeUtils;
 
 import java.util.ArrayList;
+import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -66,21 +68,31 @@ import java.util.Arrays;
 import org.json.JSONObject;
 import org.json.JSONException;
 
-public class QsPanelStyles extends SettingsPreferenceFragment {
+public class SystemStyles extends SettingsPreferenceFragment {
 
     private RecyclerView mRecyclerView;
     private ThemeUtils mThemeUtils;
-    private String mCategory = "android.theme.customization.qs_style";
+    private String mCategory = "android.theme.customization.style.android";
 
     private List<String> mPkgs;
+
+    private ExecutorService mExecutor = Executors.newSingleThreadExecutor();
+    private Handler mHandler = new Handler();
+    private final AtomicBoolean mApplyingOverlays = new AtomicBoolean(false);
+
+    Map<String, String> overlayMap = new HashMap<String, String>();
+    {
+        overlayMap.put("com.android.settings", "android.theme.customization.style.settings");
+        overlayMap.put("com.android.systemui", "android.theme.customization.style.systemui");
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getActivity().setTitle(R.string.theme_customization_qs_style_title);
+        getActivity().setTitle(R.string.theme_customization_ui_style_title);
 
         mThemeUtils = new ThemeUtils(getActivity());
-        mPkgs = mThemeUtils.getOverlayPackagesForCategory(mCategory, "com.android.systemui");
+        mPkgs = mThemeUtils.getOverlayPackagesForCategory(mCategory, "android");
     }
 
     @Override
@@ -119,39 +131,41 @@ public class QsPanelStyles extends SettingsPreferenceFragment {
 
         @Override
         public CustomViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-            View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.qs_panel_option, parent, false);
+            View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.systemstyle_option, parent, false);
             CustomViewHolder vh = new CustomViewHolder(v);
             return vh;
         }
 
         @Override
         public void onBindViewHolder(CustomViewHolder holder, final int position) {
-            String navPkg = mPkgs.get(position);
+            String pkg = mPkgs.get(position);
+            String label = getLabel(holder.itemView.getContext(), pkg);
 
-            String currentPackageName = mThemeUtils.getOverlayInfos(mCategory, "com.android.systemui").stream()
+            String currentPackageName = mThemeUtils.getOverlayInfos(mCategory).stream()
                 .filter(info -> info.isEnabled())
                 .map(info -> info.packageName)
                 .findFirst()
-                .orElse("com.android.systemui");
+                .orElse("android");
 
-            holder.name.setText("com.android.systemui".equals(navPkg) ? "Default" : getLabel(holder.name.getContext(), navPkg));
+            holder.title.setText("android".equals(pkg) ? "Default" : label);
+            holder.title.setTextSize(20);
+            holder.name.setVisibility(View.GONE);
 
-            holder.name.setTextSize(24);
-
-            if (currentPackageName.equals(navPkg)) {
-                mAppliedPkg = navPkg;
+            if (currentPackageName.equals(pkg)) {
+                mAppliedPkg = pkg;
                 if (mSelectedPkg == null) {
-                    mSelectedPkg = navPkg;
+                    mSelectedPkg = pkg;
                 }
             }
 
-            holder.itemView.setActivated(navPkg == mSelectedPkg);
+            holder.itemView.setActivated(pkg == mSelectedPkg);
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    if (mApplyingOverlays.get()) return;
                     updateActivatedStatus(mSelectedPkg, false);
-                    updateActivatedStatus(navPkg, true);
-                    mSelectedPkg = navPkg;
+                    updateActivatedStatus(pkg, true);
+                    mSelectedPkg = pkg;
                     enableOverlays(position);
                 }
             });
@@ -164,8 +178,10 @@ public class QsPanelStyles extends SettingsPreferenceFragment {
 
         public class CustomViewHolder extends RecyclerView.ViewHolder {
             TextView name;
+            TextView title;
             public CustomViewHolder(View itemView) {
                 super(itemView);
+                title = (TextView) itemView.findViewById(R.id.option_title);
                 name = (TextView) itemView.findViewById(R.id.option_label);
             }
         }
@@ -182,19 +198,6 @@ public class QsPanelStyles extends SettingsPreferenceFragment {
         }
     }
 
-    public Drawable getDrawable(Context context, String pkg, String drawableName) {
-        try {
-            PackageManager pm = context.getPackageManager();
-            Resources res = pm.getResourcesForApplication(pkg);
-            int resId = res.getIdentifier(drawableName, "drawable", pkg);
-            return res.getDrawable(resId);
-        }
-        catch (PackageManager.NameNotFoundException e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-
     public String getLabel(Context context, String pkg) {
         PackageManager pm = context.getPackageManager();
         try {
@@ -207,6 +210,27 @@ public class QsPanelStyles extends SettingsPreferenceFragment {
     }
 
     public void enableOverlays(int position) {
-        mThemeUtils.setOverlayEnabled(mCategory, mPkgs.get(position), "com.android.systemui");
+        mApplyingOverlays.set(true);
+        mExecutor.execute(() -> {
+            mThemeUtils.setOverlayEnabled(mCategory, mPkgs.get(position), "android");
+            String pattern = "android".equals(mPkgs.get(position)) ? ""
+                    : mPkgs.get(position).split("\\.")[4];
+            for (Map.Entry<String, String> entry : overlayMap.entrySet()) {
+                enableOverlay(entry.getValue(), entry.getKey(), pattern);
+            }
+            mHandler.post(() -> mApplyingOverlays.set(false));
+        });
+    }
+
+    public void enableOverlay(String category, String target, String pattern) {
+        if (pattern.isEmpty()) {
+            mThemeUtils.setOverlayEnabled(category, "android", "android");
+            return;
+        }
+        for (String pkg: mThemeUtils.getOverlayPackagesForCategory(category, target)) {
+            if (pkg.contains(pattern)) {
+                mThemeUtils.setOverlayEnabled(category, pkg, target);
+            }
+        }
     }
 }

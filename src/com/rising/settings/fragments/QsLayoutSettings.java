@@ -81,9 +81,7 @@ public class QsLayoutSettings extends SettingsPreferenceFragment
     private CustomSeekBarPreference mQsRows;
     private CustomSeekBarPreference mQqsRows;
     private SystemSettingListPreference mPageTransitions;
-    private Preference mQsStyle;
-    private Preference mNfStyle;
-    private Preference mBbStyle;
+
     private Preference mQsHeaderCustomImagePicker;
     private ThemeUtils mThemeUtils;
     private Handler mHandler;
@@ -103,14 +101,13 @@ public class QsLayoutSettings extends SettingsPreferenceFragment
         super.onCreate(savedInstance);
         addPreferencesFromResource(R.xml.qs_layout_settings);
 
-	mThemeUtils = new ThemeUtils(getActivity());
+	      mThemeUtils = new ThemeUtils(getActivity());
 
         final Context mContext = getActivity().getApplicationContext();
         final ContentResolver resolver = mContext.getContentResolver();
         final PreferenceScreen prefScreen = getPreferenceScreen();
 
         mQsHeaderCustomImagePicker = findPreference(KEY_CUSTOM_QS_HEADER_IMAGE_URI);
-        mCustomSettingsObserver.observe();
 
         mPageTransitions = (SystemSettingListPreference) findPreference(QS_PAGE_TRANSITIONS);
         mPageTransitions.setOnPreferenceChangeListener(this);
@@ -141,15 +138,6 @@ public class QsLayoutSettings extends SettingsPreferenceFragment
 
         mQqsRows = (CustomSeekBarPreference) findPreference(KEY_QQS_ROW_PORTRAIT);
         mQqsRows.setOnPreferenceChangeListener(this);
-
-        mQsStyle = (Preference) prefScreen.findPreference("qs_panel_style");
-        mQsStyle.setOnPreferenceChangeListener(this);
-
-        mNfStyle = (Preference) prefScreen.findPreference("qs_bb_style");
-        mNfStyle.setOnPreferenceChangeListener(this);
-
-        mBbStyle = (Preference) prefScreen.findPreference("qs_bb_style");
-        mBbStyle.setOnPreferenceChangeListener(this);
 
         mContext = getActivity();
 
@@ -289,7 +277,7 @@ public class QsLayoutSettings extends SettingsPreferenceFragment
                 currentValue[0] != mQsRows.getValue() * 10 + mQsColumns.getValue() ||
                 currentValue[1] != qqs_rows * 10 + mQsColumns.getValue()
             );
-	} else if (preference == mPageTransitions) {
+	      } else if (preference == mPageTransitions) {
             int customTransitions = Integer.parseInt(((String) newValue).toString());
             Settings.System.putIntForUser(getContentResolver(),
                     Settings.System.CUSTOM_TRANSITIONS_KEY, customTransitions, UserHandle.USER_CURRENT);
@@ -307,85 +295,6 @@ public class QsLayoutSettings extends SettingsPreferenceFragment
         return true;
     }
 
-
-    private CustomSettingsObserver mCustomSettingsObserver = new CustomSettingsObserver(mHandler);
-    private class CustomSettingsObserver extends ContentObserver {
-
-        CustomSettingsObserver(Handler handler) {
-            super(handler);
-        }
-
-        void observe() {
-            Context mContext = getActivity();
-            ContentResolver resolver = mContext.getContentResolver();
-            resolver.registerContentObserver(Settings.System.getUriFor(
-                    Settings.System.QS_PANEL_STYLE),
-                    false, this, UserHandle.USER_ALL);
-        }
-
-        @Override
-        public void onChange(boolean selfChange, Uri uri) {
-            if (uri.equals(Settings.System.getUriFor(Settings.System.QS_PANEL_STYLE))) {
-                updateQsStyle();
-            }
-        }
-    }
-
-    private void updateQsStyle() {
-        ContentResolver resolver = getActivity().getContentResolver();
-
-        int qsPanelStyle = Settings.System.getIntForUser(getActivity().getContentResolver(),
-                Settings.System.QS_PANEL_STYLE , 0, UserHandle.USER_CURRENT);
-
-	String qsUIStyleCategory = "android.theme.customization.qs_ui";
-	String qsPanelStyleCategory = "android.theme.customization.qs_panel";
-
-	/// reset all overlays before applying
-	resetQsOverlays(qsPanelStyleCategory);
-
-	if (qsPanelStyle == 0) return;
-
-        switch (qsPanelStyle) {
-            case 1:
-              setQsStyle("com.android.system.qs.outline", qsPanelStyleCategory);
-              break;
-            case 2:
-            case 3:
-              setQsStyle("com.android.system.qs.twotoneaccent", qsPanelStyleCategory);
-              break;
-            case 4:
-              setQsStyle("com.android.system.qs.shaded", qsPanelStyleCategory);
-              break;
-            case 5:
-              setQsStyle("com.android.system.qs.cyberpunk", qsPanelStyleCategory);
-              break;
-            case 6:
-              setQsStyle("com.android.system.qs.neumorph", qsPanelStyleCategory);
-              break;
-            case 7:
-              setQsStyle("com.android.system.qs.reflected", qsPanelStyleCategory);
-              break;
-            case 8:
-              setQsStyle("com.android.system.qs.surround", qsPanelStyleCategory);
-              break;
-            case 9:
-              setQsStyle("com.android.system.qs.thin", qsPanelStyleCategory);
-              break;
-            case 10:
-              setQsStyle("com.android.system.qs.twotoneaccenttrans", qsPanelStyleCategory);
-              break;
-            default:
-              break;
-        }
-    }
-
-    public void resetQsOverlays(String category) {
-        mThemeUtils.setOverlayEnabled(category, overlayThemeTarget, overlayThemeTarget);
-    }
-
-    public void setQsStyle(String overlayName, String category) {
-        mThemeUtils.setOverlayEnabled(category, overlayName, overlayThemeTarget);
-    }
 
     @Override
     public int getMetricsCategory() {

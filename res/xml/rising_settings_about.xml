@@ -20,6 +20,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:title="@string/about_rising" >
 
+    <com.android.settingslib.widget.IllustrationPreference
+        android:key="lottie_row_rising_about"
+        app:lottie_rawRes="@raw/display_illustration" />
+
     <PreferenceCategory
          android:title="@string/rising_redirects" >
 
