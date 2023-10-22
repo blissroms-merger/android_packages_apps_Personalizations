@@ -1696,4 +1696,8 @@
     <string name="quicksettings_interface_title">QuickSettings Interface</string>
     <string name="status_bar_interface_title">Status Bar Interface</string>
     <string name="system_interface_title">System Interface</string>
+
+    <!-- Text Brightness -->
+    <string name="bb_show_percentage_title">Brightness percentage</string>
+    <string name="bb_show_percentage_summary">Show brightness percentage text in brightness bar</string>
 </resources>
