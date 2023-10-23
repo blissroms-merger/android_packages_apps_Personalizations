@@ -42,6 +42,13 @@
             android:fragment="com.rising.settings.fragments.misc.doze.EdgeLightSettings"
             app:position="middle" />
 
+        <com.rising.settings.preferences.AdaptivePreference
+            android:key="ambient_customization"
+            android:title="@string/ambient_text_category_title"
+            android:summary="@string/ambient_text_category_summary"
+            android:fragment="com.rising.settings.fragments.misc.doze.AmbientCustomizations"
+            app:position="middle"/>
+
         <com.rising.settings.preferences.SecureSettingSwitchPreference
             android:key="lockscreen_media_metadata"
             android:icon="@drawable/ic_movie"

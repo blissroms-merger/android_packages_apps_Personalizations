@@ -27,6 +27,7 @@
 
     <com.rising.settings.preferences.SecureSettingListPreference
         android:key="theme_style"
+        android:icon="@drawable/ic_themes"
         android:title="@string/theme_style_title"
         android:entries="@array/theme_style_entries"
         android:entryValues="@array/theme_style_values"
@@ -35,6 +36,7 @@
 
     <com.rising.settings.preferences.SecureSettingListPreference
         android:key="color_source"
+        android:icon="@drawable/ic_pulse"
         android:title="@string/color_source_title"
         android:entries="@array/color_source_entries"
         android:entryValues="@array/color_source_values"
@@ -43,12 +45,14 @@
 
     <com.rising.settings.preferences.colorpicker.SecureSettingColorPickerPreference
         android:key="accent_color"
+        android:icon="@drawable/ic_color_bucket"
         android:title="@string/accent_color_title"
         android:summary="@string/accent_color_summary"
         app:position="middle" />
 
     <com.rising.settings.preferences.SecureSettingSwitchPreference
         android:key="accent_background"
+        android:icon="@drawable/ic_header"
         android:title="@string/accent_background_title"
         android:summary="@string/accent_background_summary"
         android:defaultValue="false"
@@ -56,12 +60,14 @@
 
     <com.rising.settings.preferences.colorpicker.SecureSettingColorPickerPreference
         android:key="bg_color"
+        android:icon="@drawable/ic_color_bucket"
         android:title="@string/bg_color_title"
         android:summary="@string/bg_color_summary"
         app:position="middle" />
 
     <com.rising.settings.preferences.SecureSettingSeekBarPreference
         android:key="luminance_factor"
+        android:icon="@drawable/ic_blur"
         android:title="@string/luminance_factor_title"
         android:summary="@string/luminance_factor_summary"
         android:max="100"
@@ -74,6 +80,7 @@
 
     <com.rising.settings.preferences.SecureSettingSeekBarPreference
         android:key="chroma_factor"
+        android:icon="@drawable/ic_blur"
         android:title="@string/chroma_factor_title"
         android:summary="@string/chroma_factor_summary"
         android:max="100"
@@ -86,6 +93,7 @@
 
     <com.rising.settings.preferences.SecureSettingSwitchPreference
         android:key="tint_background"
+        android:icon="@drawable/ic_header"
         android:title="@string/tint_background_title"
         android:summary="@string/tint_background_summary"
         android:defaultValue="false"
