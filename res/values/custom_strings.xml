@@ -45,6 +45,8 @@
     <!-- Media player settings -->
     <string name="media_controls_always_show_time_title">Always show time</string>
     <string name="media_controls_always_show_time_summary">Always show passed and total time on media player</string>
+    <string name="show_media_squiggle_animation_title">Seekbar Animation</string>
+    <string name="show_media_squiggle_animation_summary">Enable to have seekbar show squiggle animation</string>
 
     <!-- RisingOS versioning -->
     <string name="rising_version_title">RisingOS Version</string>

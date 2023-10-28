@@ -76,6 +76,14 @@
         android:defaultValue="false"
         app:position="middle"/>
 
+    <com.rising.settings.preferences.SecureSettingSwitchPreference
+        android:key="show_media_squiggle_animation"
+        android:icon="@drawable/ic_music_note"
+        android:title="@string/show_media_squiggle_animation_title"
+        android:summary="@string/show_media_squiggle_animation_summary"
+        android:defaultValue="false"
+        app:position="middle"/>
+
     <com.rising.settings.preferences.SystemSettingSwitchPreference
         android:key="media_artwork_blur_enabled"
         android:icon="@drawable/ic_blur"

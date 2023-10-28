@@ -169,9 +169,11 @@ public class AmbientCustomizations extends SettingsPreferenceFragment implements
     @Override
     public boolean onPreferenceTreeClick(Preference preference) {
         if (preference == mAmbientImage) {
-            Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+            Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+            intent.addCategory(Intent.CATEGORY_OPENABLE);
+            intent.setPackage("com.android.gallery3d");
             intent.setType("image/*");
-            startActivityForResult(intent, 10001);
+            startActivityForResult(intent, REQUEST_PICK_IMAGE);
             return true;
         }
         return super.onPreferenceTreeClick(preference);
@@ -179,57 +181,12 @@ public class AmbientCustomizations extends SettingsPreferenceFragment implements
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent result) {
-        if (requestCode == 10001) {
+        if (requestCode == REQUEST_PICK_IMAGE) {
             if (resultCode != Activity.RESULT_OK) {
                 return;
             }
-
-            final Uri imgUri = result.getData();
-            if (imgUri != null) {
-                String savedImagePath = saveImageToInternalStorage(getContext(), imgUri);
-                if (savedImagePath != null) {
-                    ContentResolver resolver = getContext().getContentResolver();
-                    Settings.System.putStringForUser(resolver, Settings.System.AMBIENT_CUSTOM_IMAGE, savedImagePath, UserHandle.USER_CURRENT);
-                }
-            }
-        }
-    }
-
-    private String saveImageToInternalStorage(Context context, Uri imgUri) {
-        try {
-            InputStream inputStream;
-            if (imgUri.toString().startsWith("content://com.google.android.apps.photos.contentprovider")) {
-                List<String> segments = imgUri.getPathSegments();
-                if (segments.size() > 2) {
-                    String mediaUriString = URLDecoder.decode(segments.get(2), StandardCharsets.UTF_8.name());
-                    Uri mediaUri = Uri.parse(mediaUriString);
-                    inputStream = context.getContentResolver().openInputStream(mediaUri);
-                } else {
-                    throw new FileNotFoundException("Failed to parse Google Photos content URI");
-                }
-            } else {
-                inputStream = context.getContentResolver().openInputStream(imgUri);
-            }
-            Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
-            String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.US).format(new Date());
-            String imageFileName = "AMBIENT_IMAGE_" + timeStamp + ".png";
-            File directory = new File("/sdcard/ambientimage");
-            if (!directory.exists() && !directory.mkdirs()) {
-                return null;
-            }
-            File[] files = directory.listFiles((dir, name) -> name.startsWith("AMBIENT_IMAGE_") && name.endsWith(".png"));
-            if (files != null) {
-                for (File file : files) {
-                    file.delete();
-                }
-            }
-            File file = new File(directory, imageFileName);
-            try (FileOutputStream outputStream = new FileOutputStream(file)) {
-                bitmap.compress(Bitmap.CompressFormat.PNG, 100, outputStream);
-            }
-            return file.getAbsolutePath();
-        } catch (Exception e) {
-            return null;
+            final Uri imageUri = result.getData();
+            Settings.System.putString(getContentResolver(), Settings.System.AMBIENT_CUSTOM_IMAGE, imageUri.toString());
         }
     }
 
