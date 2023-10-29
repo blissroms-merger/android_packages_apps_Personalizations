@@ -169,9 +169,7 @@ public class AmbientCustomizations extends SettingsPreferenceFragment implements
     @Override
     public boolean onPreferenceTreeClick(Preference preference) {
         if (preference == mAmbientImage) {
-            Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
-            intent.addCategory(Intent.CATEGORY_OPENABLE);
-            intent.setPackage("com.android.gallery3d");
+            Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
             intent.setType("image/*");
             startActivityForResult(intent, REQUEST_PICK_IMAGE);
             return true;
@@ -185,10 +183,15 @@ public class AmbientCustomizations extends SettingsPreferenceFragment implements
             if (resultCode != Activity.RESULT_OK) {
                 return;
             }
+
             final Uri imageUri = result.getData();
-            Settings.System.putString(getContentResolver(), Settings.System.AMBIENT_CUSTOM_IMAGE, imageUri.toString());
+            if (imageUri != null) {
+                Settings.System.putStringForUser(getContentResolver(), Settings.System.AMBIENT_CUSTOM_IMAGE, imageUri.toString(), UserHandle.USER_CURRENT);
+                }
+            }
         }
     }
+
 
     @Override
     public int getMetricsCategory() {
