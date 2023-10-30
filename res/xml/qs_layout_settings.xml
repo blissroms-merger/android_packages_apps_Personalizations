@@ -142,12 +142,23 @@
     <PreferenceCategory
         android:title="@string/qs_misc_category">
 
+    <!-- QS Header Space -->    
+     <com.rising.settings.preferences.SystemSettingSeekBarPreference
+        android:key="qs_header_size"
+        android:icon="@drawable/ic_header"
+        android:title="@string/large_qs_switch_title"
+        android:max="800"
+        settings:min="110"
+        settings:interval="5"
+        android:defaultValue="110"
+        app:position="top"/>
+
     <com.rising.settings.preferences.SystemSettingSwitchPreference
         android:key="secure_lockscreen_qs_disabled"
         android:icon="@drawable/ic_lock_alert"
         android:title="@string/disable_qs_title"
         android:summary="@string/disable_qs_summary"
-        app:position="top"/>
+        app:position="middle"/>
 
     <com.rising.settings.preferences.SystemSettingSwitchPreference
         android:key="sys_qs_footer_data_usage"

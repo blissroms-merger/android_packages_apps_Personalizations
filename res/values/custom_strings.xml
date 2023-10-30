@@ -157,5 +157,8 @@
     <string name="color_mode_balance_green">Green strength</string>
     <string name="color_mode_balance_blue">Blue strength</string>
     <string name="keywords_color_balance">color, color balance, color correction, red, green, blue, LiveDisplay</string>
+
+    <!-- QS Header Size -->
+    <string name="large_qs_switch_title">QS Header Size</string>
 </resources>
 

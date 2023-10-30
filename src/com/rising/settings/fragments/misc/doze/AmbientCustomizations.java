@@ -187,7 +187,6 @@ public class AmbientCustomizations extends SettingsPreferenceFragment implements
             final Uri imageUri = result.getData();
             if (imageUri != null) {
                 Settings.System.putStringForUser(getContentResolver(), Settings.System.AMBIENT_CUSTOM_IMAGE, imageUri.toString(), UserHandle.USER_CURRENT);
-                }
             }
         }
     }
