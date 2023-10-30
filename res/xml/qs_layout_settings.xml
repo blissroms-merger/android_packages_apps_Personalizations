@@ -153,6 +153,17 @@
         android:defaultValue="110"
         app:position="top"/>
 
+        <com.rising.settings.preferences.SystemSettingSeekBarPreference
+            android:key="qs_header_clock_size"
+            android:icon="@drawable/ic_font"
+            android:title="@string/clock_font_size_title"
+            android:max="27"
+            settings:min="10"
+            settings:interval="1"
+            android:defaultValue="14"
+            settings:units="@string/unit_pixels"
+            app:position="middle"/>
+
     <com.rising.settings.preferences.SystemSettingSwitchPreference
         android:key="secure_lockscreen_qs_disabled"
         android:icon="@drawable/ic_lock_alert"
