@@ -58,7 +58,6 @@ public class UserInterface extends SettingsPreferenceFragment implements
     public static final String TAG = "UserInterface";
 
     private static final String SETTINGS_DASHBOARD_STYLE = "settings_dashboard_style";
-    private static final String SETTINGS_HEADER_IMAGE = "settings_header_image";
     private static final String SETTINGS_HEADER_IMAGE_RANDOM = "settings_header_image_random";
     private static final String SETTINGS_HEADER_TEXT = "settings_header_text";
     private static final String SETTINGS_HEADER_TEXT_ENABLED = "settings_header_text_enabled";
@@ -73,7 +72,6 @@ public class UserInterface extends SettingsPreferenceFragment implements
     private SystemSettingListPreference mAboutPhoneStyle;
     private SystemSettingSwitchPreference mUseStockLayout;
     private SystemSettingSwitchPreference mHideUserCard;
-    private Preference mSettingsHeaderImage;
     private Preference mSettingsHeaderImageRandom;
     private Preference mSettingsMessage;
     private SystemSettingEditTextPreference mSettingsHeaderText;
@@ -97,8 +95,6 @@ public class UserInterface extends SettingsPreferenceFragment implements
         mSettingsHeaderImageRandom.setOnPreferenceChangeListener(this);
         mSettingsMessage = findPreference(SETTINGS_CONTEXTUAL_MESSAGES);
         mSettingsMessage.setOnPreferenceChangeListener(this);
-        mSettingsHeaderImage = findPreference(SETTINGS_HEADER_IMAGE);
-        mSettingsHeaderImage.setOnPreferenceChangeListener(this);
         mUseStockLayout = (SystemSettingSwitchPreference) findPreference(USE_STOCK_LAYOUT);
         mUseStockLayout.setOnPreferenceChangeListener(this);
         mAboutPhoneStyle = (SystemSettingListPreference) findPreference(ABOUT_PHONE_STYLE);
@@ -126,9 +122,6 @@ public class UserInterface extends SettingsPreferenceFragment implements
             systemUtils.showSettingsRestartDialog(getActivity());
             return true;
         } else if (preference == mAboutPhoneStyle) {
-            systemUtils.showSettingsRestartDialog(getActivity());
-            return true;
-        } else if (preference == mSettingsHeaderImage) {
             systemUtils.showSettingsRestartDialog(getActivity());
             return true;
         } else if (preference == mSettingsHeaderImageRandom) {

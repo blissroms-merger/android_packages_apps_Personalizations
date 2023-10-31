@@ -219,15 +219,11 @@
           android:defaultValue="false"
           app:position="middle" />
 
-    <!-- Settings Header - todo: replace with picker api -->    
-    <com.rising.settings.preferences.SystemSettingSeekBarPreference
+    <com.rising.settings.preferences.AdaptivePreference
         android:key="settings_header_image"
         android:icon="@drawable/ic_header"
         android:title="@string/settings_header_image_title"
-        android:max="98"
-        settings:min="1"
-        settings:interval="1"
-        android:defaultValue="1"
+        android:fragment="com.rising.settings.fragments.SetBannerImageStyles"
         app:position="middle" />
 
     <com.rising.settings.preferences.SystemSettingSwitchPreference
