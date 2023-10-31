@@ -157,6 +157,7 @@ public class StatusBar extends SettingsPreferenceFragment implements
         mPrivacyLoc.setOnPreferenceChangeListener(this);
         mPrivacyMedia = findPreference(KEY_STATUS_BAR_PRIVACY_MEDIA);
         mPrivacyMedia.setOnPreferenceChangeListener(this);
+
     }
 
     @Override
