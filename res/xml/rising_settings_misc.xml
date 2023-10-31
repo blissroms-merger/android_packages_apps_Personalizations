@@ -185,6 +185,16 @@
         android:defaultValue="0"
         app:position="middle" />
 
+    <com.rising.settings.preferences.SystemSettingListPreference
+        android:key="power_menu_animations"
+        android:icon="@drawable/ic_power_menu_animation"
+        android:title="@string/power_menu_animation_title"
+        android:entries="@array/power_menu_animations_entries"
+        android:entryValues="@array/power_menu_animations_values"
+        android:summary="%s"
+        android:defaultValue="0"
+        app:position="middle" />
+
     <!-- Three-fingers-swipe to screenshot -->
     <com.rising.settings.preferences.SystemSettingSwitchPreference
         android:key="swipe_to_screenshot"
