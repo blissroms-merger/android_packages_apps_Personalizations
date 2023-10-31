@@ -44,6 +44,7 @@
 
         <com.rising.settings.preferences.AdaptivePreference
             android:key="ambient_customization"
+            android:icon="@drawable/ic_light_switch"
             android:title="@string/ambient_text_category_title"
             android:summary="@string/ambient_text_category_summary"
             android:fragment="com.rising.settings.fragments.misc.doze.AmbientCustomizations"

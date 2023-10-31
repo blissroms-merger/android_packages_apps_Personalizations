@@ -12,6 +12,7 @@
 
     <com.rising.settings.preferences.SystemSettingSwitchPreference
         android:key="qs_header_image_enabled"
+        android:icon="@drawable/ic_header"
         android:title="@string/qs_header_image_enabled_title"
         android:summary="@string/qs_header_image_enabled_summary"
         android:defaultValue="false"
@@ -19,6 +20,7 @@
 
     <com.rising.settings.preferences.AdaptivePreference
         android:key="qs_header_image"
+        android:icon="@drawable/ic_header"
         android:title="@string/qs_header_image_title"
         android:summary="@string/qs_header_image_summary"
         android:dependency="qs_header_image_enabled"
@@ -27,6 +29,7 @@
 
     <com.rising.settings.preferences.AdaptivePreference
         android:key="qs_header_image_uri"
+        android:icon="@drawable/ic_header"
         android:title="@string/file_header_select_title"
         android:summary="@string/file_header_select_summary"
         android:persistent="false"
@@ -53,7 +56,9 @@
 
     <com.rising.settings.preferences.SystemSettingSeekBarPreference
         android:key="qs_header_image_alpha"
+        android:icon="@drawable/ic_blur"
         android:title="@string/qs_header_image_alpha_title"
+        android:summary="@string/qs_header_image_alpha_summary"
         android:max="255"
         settings:min="0"
         settings:interval="1"
@@ -63,9 +68,9 @@
 
      <com.rising.settings.preferences.SystemSettingSeekBarPreference
         android:key="qs_header_image_fade_level"
-        android:icon="@drawable/ic_color_bucket"
-        android:title="@string/qs_header_image_fade_level_level_title"
-        android:summary="@string/qs_header_image_fade_level_level_summary"
+        android:icon="@drawable/ic_blur"
+        android:title="@string/qs_header_image_fade_level_title"
+        android:summary="@string/qs_header_image_fade_level_summary"
         android:defaultValue="40"
         settings:interval="1"
         android:max="100"
@@ -75,6 +80,7 @@
 
     <com.rising.settings.preferences.SystemSettingSeekBarPreference
         android:key="qs_header_image_height_portrait"
+        android:icon="@drawable/ic_pocket"
         android:title="@string/qs_header_image_height_portrait_title"
         android:max="550"
         settings:min="50"
@@ -85,6 +91,7 @@
 
     <com.rising.settings.preferences.SystemSettingSwitchPreference
         android:key="qs_header_image_landscape_enabled"
+        android:icon="@drawable/ic_header"
         android:title="@string/qs_header_image_landscape_enabled_title"
         android:summary="@string/qs_header_image_landscape_enabled_summary"
         android:dependency="qs_header_image_enabled"
@@ -93,6 +100,7 @@
 
     <com.rising.settings.preferences.SystemSettingSeekBarPreference
         android:key="qs_header_image_height_landscape"
+        android:icon="@drawable/ic_pocket"
         android:title="@string/qs_header_image_height_landscape_title"
         android:max="400"
         settings:min="50"
@@ -103,6 +111,7 @@
     <com.rising.settings.preferences.SystemSettingSeekBarPreference
         android:key="qs_header_image_padding_side"
         android:title="@string/qs_header_image_padding_side_title"
+        android:icon="@drawable/ic_arrow_right_24"
         android:max="100"
         settings:min="-100"
         android:dependency="qs_header_image_enabled"
@@ -112,6 +121,7 @@
     <com.rising.settings.preferences.SystemSettingSeekBarPreference
         android:key="qs_header_image_padding_top"
         android:title="@string/qs_header_image_padding_top_title"
+        android:icon="@drawable/ic_arrow_up_24"
         android:max="150"
         settings:min="-20"
         android:dependency="qs_header_image_enabled"

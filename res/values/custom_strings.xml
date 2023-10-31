@@ -208,10 +208,11 @@
     <string name="qs_header_image_height_portrait_title">Height (potrait)</string>
     <string name="qs_header_image_height_landscape_title">Height (landScape)</string>
     <string name="qs_header_image_alpha_title">Opacity</string>
+    <string name="qs_header_image_alpha_summary">Opacity level of the QS header image</string>
     <string name="qs_header_image_padding_side_title">Side padding</string>
     <string name="qs_header_image_padding_top_title">Top padding</string>
-    <string name="qs_header_image_fade_level_level_title">QS header image fade level</string>
-    <string name="qs_header_image_fade_level_level_summary">Fade level of the QS header image</string>
+    <string name="qs_header_image_fade_level_title">Fade</string>
+    <string name="qs_header_image_fade_level_summary">Fade level of the QS header image</string>
 
     <!-- Power menu Animations  -->
     <string name="power_menu_animation_title">Power menu animation</string>
