@@ -172,6 +172,16 @@
             android:defaultValue="true"
             app:position="top" />
 
+        <com.rising.settings.preferences.SystemSettingListPreference
+            android:key="lockscreen_charge_temp_unit"
+            android:icon="@drawable/ic_battery_charging"
+            android:title="@string/lockscreen_charge_temp_unit_title"
+            android:entries="@array/lockscreen_charge_temp_unit_entries"
+            android:entryValues="@array/lockscreen_charge_temp_unit_values"
+            android:dependency="lockscreen_battery_info"
+            android:defaultValue="1"
+            app:position="middle" />
+
         <com.rising.settings.preferences.AdaptivePreference
             android:key="udfps_settings"
             android:icon="@drawable/ic_fp_selector"
